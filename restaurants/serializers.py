@@ -3,10 +3,13 @@ from .models import Restaurant
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
-    """
-    Serializador para el modelo Restaurant
-    """
-
     class Meta:
         model = Restaurant
         fields = "__all__"
+        extra_kwargs = {
+            "rating": {"required": False},
+            "status": {"required": False},
+            "category": {"required": False},
+            "latitude": {"required": False},
+            "longitude": {"required": False},
+        }

@@ -84,7 +84,7 @@ DATABASES = {
         "NAME": "restaurant_db",  # Coincide con POSTGRES_DB en docker-compose
         "USER": "postgres",  # Coincide con POSTGRES_USER en docker-compose
         "PASSWORD": "restaurant",  # Coincide con POSTGRES_PASSWORD en docker-compose
-        "HOST": "db",  # Nombre del servicio PostgreSQL en docker-compose
+        "HOST": "localhost",  # Nombre del servicio PostgreSQL en docker-compose
         "PORT": "5432",  # Puerto predeterminado de PostgreSQL
     }
 }
@@ -138,9 +138,23 @@ CELERY_TASK_SERIALIZER = "json"
 
 # Configuración de JWT
 REST_FRAMEWORK = {
+    # Renderización en JSON
     "DEFAULT_RENDERER_CLASSES": [
-        "rest_framework.renderers.JSONRenderer",  # Usa únicamente JSON
+        "rest_framework.renderers.JSONRenderer",
     ],
+    # Paginación
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,  # Tamaño de página predeterminado
+    "PAGE_SIZE": 10,
+    # Autenticación con JWT
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+    # Permisos predeterminados: Requiere autenticación
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    # Backend de Filtros
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
 }

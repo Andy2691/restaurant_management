@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import UserListCreateView, UserRetrieveUpdateDestroyView
+from .views import RegisterUserView, UserListView
+
+app_name = "users"
 
 urlpatterns = [
     path(
-        "", UserListCreateView.as_view(), name="user_list_create"
-    ),  # Listar y crear usuarios
+        "register/", RegisterUserView.as_view(), name="register"
+    ),  # Registro de usuarios
     path(
-        "<int:pk>/",
-        UserRetrieveUpdateDestroyView.as_view(),
-        name="user_detail_update_delete",
-    ),  # Detalle, actualizar y eliminar usuarios
+        "", UserListView.as_view(), name="user_list"
+    ),  # Listado de usuarios con filtros
 ]
