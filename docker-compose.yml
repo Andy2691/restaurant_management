@@ -14,8 +14,8 @@ services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: restaurant
       POSTGRES_DB: restaurant_db
     ports:
       - "5432:5432"

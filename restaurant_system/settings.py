@@ -81,11 +81,11 @@ WSGI_APPLICATION = "restaurant_system.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "restaurant_db",
-        "USER": "postgres",
-        "PASSWORD": "restaurant",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": "restaurant_db",  # Coincide con POSTGRES_DB en docker-compose
+        "USER": "postgres",  # Coincide con POSTGRES_USER en docker-compose
+        "PASSWORD": "restaurant",  # Coincide con POSTGRES_PASSWORD en docker-compose
+        "HOST": "db",  # Nombre del servicio PostgreSQL en docker-compose
+        "PORT": "5432",  # Puerto predeterminado de PostgreSQL
     }
 }
 
