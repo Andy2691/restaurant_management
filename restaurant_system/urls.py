@@ -3,6 +3,9 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 # Configuración de Swagger para la documentación de la API
 schema_view = get_schema_view(
@@ -10,9 +13,16 @@ schema_view = get_schema_view(
         title="Restaurant Management API",
         default_version="v1",
         description="Documentación de la API para la gestión de pedidos de restaurantes",
+        contact=openapi.Contact(email="soporte@restaurant.com"),
+        license=openapi.License(name="BSD License"),
     ),
     public=True,
+    permission_classes=(AllowAny,),
+    authentication_classes=(
+        JWTAuthentication,
+    ),  # Asegúrate de usar la clase directamente, no una cadena
 )
+
 
 urlpatterns = [
     # Rutas del administrador de Django

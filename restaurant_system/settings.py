@@ -78,14 +78,16 @@ WSGI_APPLICATION = "restaurant_system.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import os
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "restaurant_db",  # Coincide con POSTGRES_DB en docker-compose
-        "USER": "postgres",  # Coincide con POSTGRES_USER en docker-compose
-        "PASSWORD": "restaurant",  # Coincide con POSTGRES_PASSWORD en docker-compose
-        "HOST": "localhost",  # Nombre del servicio PostgreSQL en docker-compose
-        "PORT": "5432",  # Puerto predeterminado de PostgreSQL
+        "NAME": os.getenv("DB_NAME", "restaurant_db"),
+        "USER": os.getenv("DB_USER", "postgres"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "restaurant"),
+        "HOST": os.getenv("DB_HOST", "bd"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
@@ -158,3 +160,7 @@ REST_FRAMEWORK = {
         "django_filters.rest_framework.DjangoFilterBackend",
     ],
 }
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
