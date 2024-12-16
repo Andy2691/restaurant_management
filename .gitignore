@@ -1,0 +1,24 @@
+# Virtual environments
+venv/
+.env
+*.pyc
+__pycache__/
+
+# Database files
+*.sqlite3
+
+# Logs and debug files
+*.log
+
+# Static and media files (opcional, si no deseas subir archivos generados por Django)
+static/
+media/
+
+# Configuración de IDEs y sistemas operativos
+.DS_Store
+.idea/
+.vscode/
+
+# Docker y archivos temporales
+*.pid
+*.seed
