@@ -1,22 +1,23 @@
-version: '3.8'
+version: '3.9'
 
 services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
     ports:
       - "8000:8000"
+    volumes:
+      - .:/code
     depends_on:
       - db
       - redis
-    environment:  # Variables de entorno para la base de datos
-      DB_NAME: restaurant_db
-      DB_USER: postgres
-      DB_PASSWORD: restaurant
-      DB_HOST: bd
-      DB_PORT: 5432
+    environment:
+      - DB_NAME=restaurant_db
+      - DB_USER=postgres
+      - DB_PASSWORD=restaurant
+      - DB_HOST=db
+      - DB_PORT=5432
+      - CELERY_BROKER_URL=redis://redis:6379/0
 
   db:
     image: postgres:13
